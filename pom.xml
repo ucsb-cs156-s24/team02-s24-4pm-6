@@ -298,6 +298,9 @@
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
         <version>3.8.0</version>
+        <configuration>
+          <propertyFile>liquibase.properties</propertyFile>
+        </configuration>
       </plugin>
 
     </plugins>

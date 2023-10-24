@@ -51,3 +51,7 @@ build/
 ### Local Configuration ###
 .env
 .DS_Store
+
+
+### liquibase Properties files used to develop locally ###
+liquibase.properties

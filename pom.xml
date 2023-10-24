@@ -129,6 +129,12 @@
       <version>1.7.0</version>
    </dependency>
 
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-maven-plugin</artifactId>
+      <version>3.8.0</version>
+    </dependency>
+
   </dependencies>
 
   <!-- (24) <repositories/> -->
@@ -286,6 +292,12 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <!-- JUnit 5 requires Surefire version 2.22.0 or higher -->
         <version>2.22.0</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.8.0</version>
       </plugin>
 
     </plugins>

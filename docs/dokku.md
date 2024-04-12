@@ -15,7 +15,7 @@ On your dokku server (once per team; the dokku server is shared by the entire te
 5. Setup Environment Variables: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
 6. Sync with repo (substitute your own team name):
    ```
-   dokku git:sync team02 https://github.com/ucsb-cs156-w24/team02-w24-6pm-4 main
+   dokku git:sync team02 https://github.com/ucsb-cs156-s24/team02-s24-6pm-4 main
    ```
 
    We always deploy the `main` branch only on the `team02` deployment, which we consider our "production" deployment (or "prod").  When working in a team environment, it is typical
@@ -42,7 +42,7 @@ deploy branches other than `main` and see what happens.
 2. Do steps (2) through (5) above.
 3. Sync with repo (substitute your own team name and branch name):
    ```
-   dokku git:sync https://github.com/ucsb-cs156-w24/team02-w24-6pm-4 team02-yourName your-branch-name
+   dokku git:sync https://github.com/ucsb-cs156-s24/team02-s24-6pm-4 team02-yourName your-branch-name
    ```
 4. Build app:
    ```

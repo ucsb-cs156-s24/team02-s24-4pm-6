@@ -36,7 +36,7 @@ public class ArticlesController extends ApiController {
     @Operation(summary= "List blog posts, newspaper articles, etc. of interest")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
-    public Iterable<Articles> allArticles() {
+    public Iterable<Articles> allArticless() {
         Iterable<Articles> articles = articlesRepository.findAll();
         return articles;
     }
@@ -85,7 +85,7 @@ public class ArticlesController extends ApiController {
                 .orElseThrow(() -> new EntityNotFoundException(Articles.class, title));
 
         articlesRepository.delete(article);
-        return genericMessage("Article with id %s deleted".formatted(title));
+        return genericMessage("Articles with id %s deleted".formatted(title));
     }
 
     @Operation(summary= "Update a single article")

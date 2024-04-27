@@ -74,7 +74,7 @@ public class UCSBOrganizationController extends ApiController {
     }
 
     
-/** 
+
     @Operation(summary= "Delete a UCSBOrganization")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
@@ -86,7 +86,7 @@ public class UCSBOrganizationController extends ApiController {
         ucsbOrganizationRepository.delete(organization);
         return genericMessage("UCSBOrganization with id %s deleted".formatted(orgCode));
     }
-
+/**
     @Operation(summary= "Update a single organization")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")

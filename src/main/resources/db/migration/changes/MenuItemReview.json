@@ -1,0 +1,74 @@
+{
+    "databaseChangeLog": [
+      {
+        "changeSet": {
+          "id": "MenuItemReview-1",
+          "author": "BryceW",
+          "preConditions": [
+            {
+              "onFail": "MARK_RAN"
+            },
+            {
+              "not": [
+                {
+                  "tableExists": {
+                    "tableName": "MENUITEMREVIEW"
+                  }
+                }
+              ]
+            }
+          ],
+          "changes": [
+            {
+              "createTable": {
+                "columns": [
+                  {
+                    "column": {
+                      "autoIncrement": true,
+                      "constraints": {
+                        "primaryKey": true,
+                        "primaryKeyName": "CONSTRAINT_43"
+                      },
+                      "name": "ID",
+                      "type": "BIGINT"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "ITEM_ID",
+                      "type": "BIGINT"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "REVIEWER_EMAIL",
+                      "type": "VARCHAR(255)"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "STARS",
+                      "type": "INT"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "DATE_REVIEWED",
+                      "type": "TIMESTAMP"
+                    }
+                  },
+                  {
+                    "column": {
+                      "name": "COMMENTS",
+                      "type": "VARCHAR(255)"
+                    }
+                  }
+                ],
+                "tableName": "MENUITEMREVIEW"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }

@@ -74,19 +74,19 @@ import javax.validation.Valid;
     }
 
     
-/** 
+
     @Operation(summary= &quot;Delete a UCSBOrganization&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @DeleteMapping(&quot;&quot;)
     public Object deleteOrganization(
             @Parameter(name=&quot;orgCode&quot;) @RequestParam String orgCode) {
-        UCSBOrganization organization = ucsbOrganizationRepository.findById(orgCode)
-                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganization.class, orgCode));
+<span class="fc" id="L83">        UCSBOrganization organization = ucsbOrganizationRepository.findById(orgCode)</span>
+<span class="fc" id="L84">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganization.class, orgCode));</span>
 
-        ucsbOrganizationRepository.delete(organization);
-        return genericMessage(&quot;UCSBOrganization with id %s deleted&quot;.formatted(orgCode));
+<span class="fc" id="L86">        ucsbOrganizationRepository.delete(organization);</span>
+<span class="fc" id="L87">        return genericMessage(&quot;UCSBOrganization with id %s deleted&quot;.formatted(orgCode));</span>
     }
-
+/**
     @Operation(summary= &quot;Update a single organization&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PutMapping(&quot;&quot;)

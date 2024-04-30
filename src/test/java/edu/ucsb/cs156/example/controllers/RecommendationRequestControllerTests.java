@@ -152,7 +152,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
         }
- /* 
+  
         // Tests for GET /api/recommendationRequests?id=...
 
         @Test
@@ -166,12 +166,16 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
         public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
                 // arrange
-                LocalDateTime ldt = LocalDateTime.parse("2022-01-03T00:00:00");
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                LocalDateTime ldt2 = LocalDateTime.parse("2022-01-04T00:00:00");
 
                 RecommendationRequest recommendationRequest = RecommendationRequest.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt)
+                                .requestorEmail("dakotabarnes@ucsb.edu")
+                                .professorEmail("test@ucsb.edu")
+                                .explanation("Great at Web Dev, gimme rec")
+                                .dateRequested(ldt1)
+                                .dateNeeded(ldt2)
+                                .done(true)
                                 .build();
 
                 when(recommendationRequestRepository.findById(eq(7L))).thenReturn(Optional.of(recommendationRequest));
@@ -210,19 +214,24 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
 
 
         // Tests for DELETE /api/recommendationrequests?id=... 
-
+ 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_delete_a_date() throws Exception {
+        public void admin_can_delete_a_recomme() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                LocalDateTime ldt2 = LocalDateTime.parse("2022-01-04T00:00:00");
 
                 RecommendationRequest recommendationRequest1 = RecommendationRequest.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt1)
+                                .requestorEmail("dakotabarnes@ucsb.edu")
+                                .professorEmail("test@ucsb.edu")
+                                .explanation("Great at Web Dev, gimme rec")
+                                .dateRequested(ldt1)
+                                .dateNeeded(ldt2)
+                                .done(true)
                                 .build();
+
 
                 when(recommendationRequestRepository.findById(eq(15L))).thenReturn(Optional.of(recommendationRequest1));
 
@@ -242,7 +251,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
         
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_tries_to_delete_non_existant_ucsbdate_and_gets_right_error_message()
+        public void admin_tries_to_delete_non_existant_recommendationrequest_and_gets_right_error_message()
                         throws Exception {
                 // arrange
 
@@ -264,23 +273,33 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_edit_an_existing_ucsbdate() throws Exception {
+        public void admin_can_edit_an_existing_recommendationrequest() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-                LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
+                LocalDateTime ldt2 = LocalDateTime.parse("2023-01-04T00:00:00");
+
+                LocalDateTime ldt3 = LocalDateTime.parse("2022-01-05T00:00:00");
+                LocalDateTime ldt4 = LocalDateTime.parse("2023-01-06T00:00:00");
 
                 RecommendationRequest recommendationRequestOrig = RecommendationRequest.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt1)
+                                .requestorEmail("dakbarnes@ucsb.edu")
+                                .professorEmail("fixed@ucsb.edu")
+                                .explanation("Greatish")
+                                .dateRequested(ldt3)
+                                .dateNeeded(ldt4)
+                                .done(true)
                                 .build();
 
                 RecommendationRequest recommendationRequestEdited = RecommendationRequest.builder()
-                                .name("firstDayOfFestivus")
-                                .quarterYYYYQ("20232")
-                                .localDateTime(ldt2)
+                                .requestorEmail("dakotabarnes@ucsb.edu")
+                                .professorEmail("test@ucsb.edu")
+                                .explanation("Great")
+                                .dateRequested(ldt1)
+                                .dateNeeded(ldt2)
+                                .done(false)
                                 .build();
+
 
                 String requestBody = mapper.writeValueAsString(recommendationRequestEdited);
 
@@ -305,18 +324,22 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
         
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_cannot_edit_ucsbdate_that_does_not_exist() throws Exception {
+        public void admin_cannot_edit_recommendationrequest_that_does_not_exist() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                LocalDateTime ldt2 = LocalDateTime.parse("2022-01-04T00:00:00");
 
-                RecommendationRequest ucsbEditedDate = RecommendationRequest.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt1)
+                RecommendationRequest recommendationRequestEdited = RecommendationRequest.builder()
+                                .requestorEmail("dakotabarnes@ucsb.edu")
+                                .professorEmail("test@ucsb.edu")
+                                .explanation("Great at Web Dev, gimme rec")
+                                .dateRequested(ldt1)
+                                .dateNeeded(ldt2)
+                                .done(true)
                                 .build();
 
-                String requestBody = mapper.writeValueAsString(ucsbEditedDate);
+                String requestBody = mapper.writeValueAsString(recommendationRequestEdited);
 
                 when(recommendationRequestRepository.findById(eq(67L))).thenReturn(Optional.empty());
 
@@ -335,5 +358,5 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                 assertEquals("RecommendationRequest with id 67 not found", json.get("message"));
 
         }
-        */
+        
 }

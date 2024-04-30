@@ -77,24 +77,24 @@ public class RecommendationRequestController extends ApiController {
         RecommendationRequest savedRecommendationRequest = recommendationRequestRepository.save(recommendationRequest);
         return savedRecommendationRequest;
     }
-/* 
+ 
     @Operation(summary= "Get a single request")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public RecommendationRequest getById(
             @Parameter(name="id") @RequestParam Long id) {
-                RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
+        RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(RecommendationRequest.class, id));
 
         return recommendationRequest;
     }
-
+ 
     @Operation(summary= "Delete a request")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteRecommendationRequest(
             @Parameter(name="id") @RequestParam Long id) {
-                RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
+        RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(RecommendationRequest.class, id));
 
         recommendationRequestRepository.delete(recommendationRequest);
@@ -108,7 +108,7 @@ public class RecommendationRequestController extends ApiController {
             @Parameter(name="id") @RequestParam Long id,
             @RequestBody @Valid RecommendationRequest incoming) {
 
-                RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
+        RecommendationRequest recommendationRequest = recommendationRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(RecommendationRequest.class, id));
 
 
@@ -124,5 +124,5 @@ public class RecommendationRequestController extends ApiController {
 
         return recommendationRequest;
     }
-    */
+    
 }

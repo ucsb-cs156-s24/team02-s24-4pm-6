@@ -35,13 +35,13 @@
                   },
                   {
                     "column": {
-                      "name": "REQUESTOREMAIL",
+                      "name": "REQUESTOR_EMAIL",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "PROFESSOREMAIL",
+                      "name": "PROFESSOR_EMAIL",
                       "type": "VARCHAR(255)"
                     }
                   },
@@ -53,13 +53,13 @@
                   },
                   {
                     "column": {
-                      "name": "DATEREQUESTED",
+                      "name": "DATE_REQUESTED",
                       "type": "TIMESTAMP"
                     }
                   },
                   {
                     "column": {
-                      "name": "DATENEEDED",
+                      "name": "DATE_NEEDED",
                       "type": "TIMESTAMP"
                     }
                   },

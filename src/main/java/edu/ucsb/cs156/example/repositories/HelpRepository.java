@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HelpRepository extends CrudRepository<Help, Long> {
-  
+  Iterable<Help> findAllByRequesterEmail(String requesterEmail);
 }

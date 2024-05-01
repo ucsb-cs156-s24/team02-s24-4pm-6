@@ -29,6 +29,12 @@
                         "primaryKey": true,
                         "primaryKeyName": "CONSTRAINT_69"
                       },
+                      "name": "ID",
+                      "type": "BIG_INT"
+                    }
+                  },
+                  {
+                    "column": {
                       "name": "REQUESTER_EMAIL",
                       "type": "VARCHAR(255)"
                     }
@@ -59,6 +65,9 @@
                   },
                   {
                     "column": {
+                      "constraints": {
+                        "nullable": false
+                      },
                       "name": "SOLVED",
                       "type": "BOOLEAN"
                     }

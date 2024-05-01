@@ -197,7 +197,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_delete_a_date() throws Exception {
+        public void admin_can_delete_an_organization() throws Exception {
                 // arrange
 
                 UCSBOrganization ZPR = UCSBOrganization.builder()
@@ -226,7 +226,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_tries_to_delete_non_existant_commons_and_gets_right_error_message()
+        public void admin_tries_to_delete_non_existant_organizations_and_gets_right_error_message()
                         throws Exception {
                 // arrange
 
@@ -242,6 +242,80 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 verify(ucsbOrganizationRepository, times(1)).findById("ZIG");
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("UCSBOrganization with id ZIG not found", json.get("message"));
+        }
+
+        // Tests for PUT /api/ucsbdiningcommons?...
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_can_edit_an_existing_organization() throws Exception {
+                // arrange
+
+                UCSBOrganization ZPROrig = UCSBOrganization.builder()
+                                .orgCode("ZPR")
+                                .orgTranslationShort("ZETA PHI RHO")
+                                .orgTranslation("ZETA PHI RHO")
+                                .inactive(true)
+                                .build();
+
+                UCSBOrganization ZPREdited = UCSBOrganization.builder()
+                                .orgCode("ZPR")
+                                .orgTranslationShort("ZETA PHI GAMMA")
+                                .orgTranslation("ZETA PHI GAMMA")
+                                .inactive(false)
+                                .build();
+
+                String requestBody = mapper.writeValueAsString(ZPREdited);
+
+                when(ucsbOrganizationRepository.findById(eq("ZPR"))).thenReturn(Optional.of(ZPROrig));
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                put("/api/ucsborganization?orgCode=ZPR")
+                                                .contentType(MediaType.APPLICATION_JSON)
+                                                .characterEncoding("utf-8")
+                                                .content(requestBody)
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                verify(ucsbOrganizationRepository, times(1)).findById("ZPR");
+                verify(ucsbOrganizationRepository, times(1)).save(ZPREdited); // should be saved with updated info
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(requestBody, responseString);
+        }
+
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_cannot_edit_organization_that_does_not_exist() throws Exception {
+                // arrange
+
+                UCSBOrganization editedOrganization = UCSBOrganization.builder()
+                                .orgCode("ZIG")
+                                .orgTranslationShort("ZETA I GAMMA")
+                                .orgTranslation("ZETA I GAMMA")
+                                .inactive(true)
+                                .build();
+
+                String requestBody = mapper.writeValueAsString(editedOrganization);
+
+                when(ucsbOrganizationRepository.findById(eq("ZIG"))).thenReturn(Optional.empty());
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                put("/api/ucsborganization?orgCode=ZIG")
+                                                .contentType(MediaType.APPLICATION_JSON)
+                                                .characterEncoding("utf-8")
+                                                .content(requestBody)
+                                                .with(csrf()))
+                                .andExpect(status().isNotFound()).andReturn();
+
+                // assert
+                verify(ucsbOrganizationRepository, times(1)).findById("ZIG");
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("UCSBOrganization with id ZIG not found", json.get("message"));
+
         }
 
     }

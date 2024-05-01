@@ -29,37 +29,37 @@
                         "primaryKey": true,
                         "primaryKeyName": "CONSTRAINT_69"
                       },
-                      "name": "requesterEmail",
+                      "name": "REQUESTER_EMAIL",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "teamID",
+                      "name": "TEAM_ID",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "tableOrBreakoutRoom",
+                      "name": "TABLE_OR_BREAKOUT_ROOM",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "requestTime",
+                      "name": "REQUEST_TIME",
                       "type": "TIMESTAMP"
                     }
                   },
                   {
                     "column": {
-                      "name": "explanation",
+                      "name": "EXPLANATION",
                       "type": "VARCHAR(255)"
                     }
                   },
                   {
                     "column": {
-                      "name": "solved",
+                      "name": "SOLVED",
                       "type": "BOOLEAN"
                     }
                   }

@@ -30,7 +30,7 @@
                         "primaryKeyName": "CONSTRAINT_69"
                       },
                       "name": "ID",
-                      "type": "BIG_INT"
+                      "type": "BIGINT"
                     }
                   },
                   {

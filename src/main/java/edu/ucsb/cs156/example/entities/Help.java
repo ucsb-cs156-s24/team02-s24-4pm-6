@@ -20,6 +20,7 @@ import lombok.Builder;
 public class Help {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
   private String requesterEmail;
   private String teamId;
   private String tableOrBreakoutRoom;

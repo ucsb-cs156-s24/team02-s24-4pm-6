@@ -69,9 +69,9 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;&quot;)
     public Articles getById(
-            @Parameter(name=&quot;title&quot;) @RequestParam String title) {
-<span class="fc" id="L73">        Articles article = articlesRepository.findById(title)</span>
-<span class="fc" id="L74">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, title));</span>
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L73">        Articles article = articlesRepository.findById(id)</span>
+<span class="fc" id="L74">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
 
 <span class="fc" id="L76">        return article;</span>
     }
@@ -80,23 +80,23 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @DeleteMapping(&quot;&quot;)
     public Object deleteArticles(
-            @Parameter(name=&quot;title&quot;) @RequestParam String title) {
-<span class="fc" id="L84">        Articles article = articlesRepository.findById(title)</span>
-<span class="fc" id="L85">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, title));</span>
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L84">        Articles article = articlesRepository.findById(id)</span>
+<span class="fc" id="L85">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
 
 <span class="fc" id="L87">        articlesRepository.delete(article);</span>
-<span class="fc" id="L88">        return genericMessage(&quot;Articles with id %s deleted&quot;.formatted(title));</span>
+<span class="fc" id="L88">        return genericMessage(&quot;Articles with id %s deleted&quot;.formatted(id));</span>
     }
 
     @Operation(summary= &quot;Update a single article&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PutMapping(&quot;&quot;)
     public Articles updateArticles(
-            @Parameter(name=&quot;title&quot;) @RequestParam String title,
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
-<span class="fc" id="L98">        Articles article = articlesRepository.findById(title)</span>
-<span class="fc" id="L99">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, title));</span>
+<span class="fc" id="L98">        Articles article = articlesRepository.findById(id)</span>
+<span class="fc" id="L99">                .orElseThrow(() -&gt; new EntityNotFoundException(Articles.class, id));</span>
 
 
 <span class="fc" id="L102">        article.setTitle(incoming.getTitle());  </span>

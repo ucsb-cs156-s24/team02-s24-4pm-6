@@ -23,9 +23,10 @@
                 "columns": [
                   {
                     "column": {
+                      "autoIncrement": true,
                       "constraints": {
                         "primaryKey": true,
-                        "primaryKeyName": "CONSTRAINT_50"
+                        "primaryKeyName": "CONSTRAINT_5"
                       },
                       "name": "ID",
                       "type": "BIGINT"

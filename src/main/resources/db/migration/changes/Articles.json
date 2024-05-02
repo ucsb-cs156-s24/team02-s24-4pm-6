@@ -23,10 +23,17 @@
                 "columns": [
                   {
                     "column": {
+                      "autoIncrement": true,
                       "constraints": {
                         "primaryKey": true,
                         "primaryKeyName": "CONSTRAINT_50"
                       },
+                      "name": "ID",
+                      "type": "BIGINT"
+                    }
+                  },
+                  {
+                    "column": {
                       "name": "TITLE",
                       "type": "VARCHAR(255)"
                     }

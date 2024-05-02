@@ -69,9 +69,9 @@ public class ArticlesController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public Articles getById(
-            @Parameter(name="title") @RequestParam String title) {
-        Articles article = articlesRepository.findById(title)
-                .orElseThrow(() -> new EntityNotFoundException(Articles.class, title));
+            @Parameter(name="id") @RequestParam Long id) {
+        Articles article = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
         return article;
     }
@@ -80,23 +80,23 @@ public class ArticlesController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteArticles(
-            @Parameter(name="title") @RequestParam String title) {
-        Articles article = articlesRepository.findById(title)
-                .orElseThrow(() -> new EntityNotFoundException(Articles.class, title));
+            @Parameter(name="id") @RequestParam Long id) {
+        Articles article = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
         articlesRepository.delete(article);
-        return genericMessage("Articles with id %s deleted".formatted(title));
+        return genericMessage("Articles with id %s deleted".formatted(id));
     }
 
     @Operation(summary= "Update a single article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public Articles updateArticles(
-            @Parameter(name="title") @RequestParam String title,
+            @Parameter(name="id") @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
-        Articles article = articlesRepository.findById(title)
-                .orElseThrow(() -> new EntityNotFoundException(Articles.class, title));
+        Articles article = articlesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
 
         article.setTitle(incoming.getTitle());  

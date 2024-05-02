@@ -17,6 +17,7 @@ import lombok.Builder;
 @Entity(name = "articles")
 public class Articles {
   @Id
+  private long id;
   private String title;
   private String url;
   private String explanation;

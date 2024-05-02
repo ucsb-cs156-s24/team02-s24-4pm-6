@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/team02-s24-4pm-6
 owner: ucsb-cs156-s24
 repo_name: team02-s24-4pm-6
-pull_requests: [{"author":{"id":"U_kgDOBXuvjg","is_bot":false,"login":"emanbareket","name":""},"headRefName":"Immanuel-Help","number":58,"title":"Immanuel help","url":"https://github.com/ucsb-cs156-s24/team02-s24-4pm-6/pull/58"}]
+pull_requests: [{"author":{"id":"U_kgDOCeKwaw","is_bot":false,"login":"ok-at-computers","name":"Kevin"},"headRefName":"Kevin-Articles","number":61,"title":"PR for articles with id indexing change","url":"https://github.com/ucsb-cs156-s24/team02-s24-4pm-6/pull/61"},{"author":{"id":"U_kgDOBXuvjg","is_bot":false,"login":"emanbareket","name":""},"headRefName":"Immanuel-Help","number":58,"title":"Immanuel help","url":"https://github.com/ucsb-cs156-s24/team02-s24-4pm-6/pull/58"}]

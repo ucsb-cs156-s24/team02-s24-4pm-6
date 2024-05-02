@@ -129,14 +129,14 @@ public class HelpControllerTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("table")
                                 .requestTime(ldt1)
                                 .explanation("please")
-                                .solved(false)
+                                .solved(true)
                                 .build();
 
                 when(helpRepository.save(eq(help1))).thenReturn(help1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/help/post?requesterEmail=ibareket@ucsb.edu&teamId=20222&tableOrBreakoutRoom=table&requestTime=2022-01-03T00:00:00&explanation=please&solved=false")
+                                post("/api/help/post?requesterEmail=ibareket@ucsb.edu&teamId=20222&tableOrBreakoutRoom=table&requestTime=2022-01-03T00:00:00&explanation=please&solved=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -171,15 +171,15 @@ public class HelpControllerTests extends ControllerTestCase {
                                 .solved(false)
                                 .build();
 
-                when(helpRepository.findById(eq(7L))).thenReturn(Optional.of(help));
+                when(helpRepository.findById(eq(1L))).thenReturn(Optional.of(help));
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/help?id=7"))
+                MvcResult response = mockMvc.perform(get("/api/help?id=1"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
 
-                verify(helpRepository, times(1)).findById(eq(7L));
+                verify(helpRepository, times(1)).findById(eq(1L));
                 String expectedJson = mapper.writeValueAsString(help);
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
@@ -187,7 +187,7 @@ public class HelpControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "USER" })
         @Test
-        public void test_that_logged_in_user_can_get_by_id_when_the_id_does_not_exist() throws Exception {
+        public void test_logged_in_user_get_by_id_when_the_id_does_not_exist() throws Exception {
 
                 // arrange
 
@@ -210,7 +210,7 @@ public class HelpControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_delete_a_date() throws Exception {
+        public void admin_can_delete_a_help() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
@@ -224,20 +224,20 @@ public class HelpControllerTests extends ControllerTestCase {
                                 .solved(false)
                                 .build();
 
-                when(helpRepository.findById(eq(15L))).thenReturn(Optional.of(help1));
+                when(helpRepository.findById(eq(1L))).thenReturn(Optional.of(help1));
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/help?id=15")
+                                delete("/api/help?id=1")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
-                verify(helpRepository, times(1)).findById(15L);
+                verify(helpRepository, times(1)).findById(1L);
                 verify(helpRepository, times(1)).delete(any());
 
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("Help request with id 15 deleted", json.get("message"));
+                assertEquals("Help request with id 1 deleted", json.get("message"));
         }
         
         @WithMockUser(roles = { "ADMIN", "USER" })
@@ -281,7 +281,7 @@ public class HelpControllerTests extends ControllerTestCase {
 
                 Help helpEdited = Help.builder()
                                 .requesterEmail("cgaucho@ucsb.edu")
-                                .teamId("20222")
+                                .teamId("20223")
                                 .tableOrBreakoutRoom("7")
                                 .requestTime(ldt2)
                                 .explanation("N/A")
@@ -290,11 +290,11 @@ public class HelpControllerTests extends ControllerTestCase {
 
                 String requestBody = mapper.writeValueAsString(helpEdited);
 
-                when(helpRepository.findById(eq(67L))).thenReturn(Optional.of(helpOrig));
+                when(helpRepository.findById(eq(1L))).thenReturn(Optional.of(helpOrig));
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/help?id=67")
+                                put("/api/help?id=1")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
@@ -302,7 +302,7 @@ public class HelpControllerTests extends ControllerTestCase {
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
-                verify(helpRepository, times(1)).findById(67L);
+                verify(helpRepository, times(1)).findById(1L);
                 verify(helpRepository, times(1)).save(helpEdited); // should be saved with correct user
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(requestBody, responseString);
@@ -322,7 +322,7 @@ public class HelpControllerTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("table")
                                 .requestTime(ldt1)
                                 .explanation("please")
-                                .solved(false)
+                                .solved(true)
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(help1);

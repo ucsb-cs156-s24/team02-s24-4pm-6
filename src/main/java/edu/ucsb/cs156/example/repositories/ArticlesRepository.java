@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ArticlesRepository extends CrudRepository<Articles, String> {
+public interface ArticlesRepository extends CrudRepository<Articles, Long> {
  
 }

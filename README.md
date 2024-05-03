@@ -1,6 +1,5 @@
 # team02-s24-4pm-6
 
-```
 | Table                       | Team Member  | Github Id      |
 |-----------------------------|--------------|----------------|
 | `UCSBDiningCommonsMenuItem` | Sawyer       | sawyerrice     |
@@ -9,7 +8,6 @@
 | `MenuItemReview`            | Bryce        | brycewangg     |
 | `HelpRequest`               | Immanuel     | emanbareket    |
 | `Articles`                  | Kevin        | ok-at-computers|
-```
 
 Instructions: <https://ucsb-cs156.github.io/s24/lab/team02.html>
 
